@@ -12,6 +12,7 @@ var ActeurID = 0; // list of ID of the Acteur.
 var PositionX = 0; // PositionX of the Acteur.
 var positionY = 0 // PositionY of the Acteur. (ou dernière postion connue)
 var lost = true;
+var otherSuicidaire = false;
 
 var suicidaire1 = new AgarioClient("suicidaire");
 var suicidaire2 = new AgarioClient("suicidaire");
@@ -99,6 +100,7 @@ suicidaire4.on('connected', function() {
 
 suicidaire1.on('ballAppear', function(ball_id) {
 	ball = suicidaire1.balls[ball_id];
+	if (ball.mine) return;
 	if (ActeurID == 0) {
 		if (ball.name == "Acteur.") {			
 			ActeurID = ball_id;
@@ -127,8 +129,30 @@ suicidaire1.on('ballAppear', function(ball_id) {
 		}
 		
 	}
+	if (ball.name = "suicidaire") {
+		
+		otherSuicidaire = true;
+		console.log('other suicidaire found.');
+		
+	}
+	
 	
 });
+
+suicidaire1.on('lostMyBalls', function() {
+	
+	
+	
+})
+
+suicidaire1.on('somebodyAteSomething', function(eater_id, eaten_id) {
+	
+	if (eater_id == ActeurID && eaten_id == suicidaire1.my_balls) {		
+		console.log("l'acteur m'a mangé !!!!!");
+		
+	}
+	
+})
 
 
 
