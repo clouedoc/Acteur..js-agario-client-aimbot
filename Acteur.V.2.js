@@ -96,6 +96,20 @@ suicidaire4.on('connected', function() {
 	}
 });
 
+suicidaire1.on('ballAppear', function(ball_id) {
+	ball = suicidaire1.balls[ball_id];
+	if (ActeurID == 0) {
+		if (ball.name == "Acteur.") {			
+			ActeurID = ball_id;
+			
+		}
+		
+		
+		
+	}
+	
+});
+
 
 
 
