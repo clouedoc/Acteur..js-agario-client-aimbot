@@ -132,6 +132,10 @@ suicidaire1.on('ballAppear', function(ball_id) {
 				PositionY = ball.y;
 				moveCells(PositionX, PositionY);
 				}
+				else {
+					console.log("ball invisible !!!");
+					
+				}
 			});
 		}
 		
@@ -185,8 +189,285 @@ suicidaire1.on('somebodyAteSomething', function(eater_id, eaten_id) {
 		}
 	}
 	
-})
+});
 
+suicidaire2.on('ballAppear', function(ball_id) {
+	ball = suicidaire2.balls[ball_id];
+	if (ball.mine) return;
+	if (ActeurID == 0) {
+		if (ball.name == "Acteur.") {			
+			ActeurID = ball_id;
+			PositionX = ball.x;
+			PositionY = ball.y;
+			moveCells(PositionX, PositionY);
+			lost = false;
+			ball.on('move', function(old_x, old_y, new_x, new_y) {				
+				PositionX = ball.x;
+				PositionY = ball.y;
+				moveCells(PositionX, PositionY);
+			});
+		}
+	}
+	if (ball_id == ActeurID) {
+		if (lost == true) {
+			PositionX = ball.x;
+			PositionY = ball.y;
+			moveCells(PositionX, PositionY);
+			lost = false;
+			ball.on('disappear', function() {
+				console.log("acteur disparu")
+				lost = true;				
+			})
+			ball.on('move', function(old_x, old_y, new_x, new_y) {
+				if (ball.visible == true) 
+				{
+				PositionX = ball.x;
+				PositionY = ball.y;
+				moveCells(PositionX, PositionY);
+				}
+				else {
+					console.log("ball invisible !!!");
+					
+				}
+			});
+		}
+		
+	}
+	if (ball.name = "suicidaire") {
+		
+		otherSuicidaire = true;
+		console.log('other suicidaire found.');
+		ball.on("destroy", function(ball_id, reason) {
+			if (reason.reason == 'eaten') {
+				if (reason.by == ActeurID) {
+					console.log("un suicidaire a été mangé par l'acteur.");
+					if (suicidaire2.my_balls.lenghts == 0) {
+						suicidaire2.spawn("suicidaire");
+						
+					}
+					
+				}
+				else
+				{
+					
+					otherSuicidaire = false;
+				}
+				
+			}
+			else {
+				
+				otherSuicidaire = false;
+			}
+			
+		})
+	}
+	
+	
+});
+
+suicidaire2.on('somebodyAteSomething', function(eater_id, eaten_id) {
+	
+	if (eater_id == ActeurID && eaten_id == suicidaire2.my_balls) {		
+		console.log("l'acteur m'a mangé !!!!!");
+		if (otherSuicidaire == true) {
+			suicidaire2.spawn("suicidaire");
+		}
+	}
+	else {
+		
+		if (eaten_id == suicidaire2.my_balls) {
+			
+			suicidaire2.spawn("suicidaire");
+		}
+	}
+	
+});
+
+suicidaire3.on('ballAppear', function(ball_id) {
+	ball = suicidaire3.balls[ball_id];
+	if (ball.mine) return;
+	if (ActeurID == 0) {
+		if (ball.name == "Acteur.") {			
+			ActeurID = ball_id;
+			PositionX = ball.x;
+			PositionY = ball.y;
+			moveCells(PositionX, PositionY);
+			lost = false;
+			ball.on('move', function(old_x, old_y, new_x, new_y) {				
+				PositionX = ball.x;
+				PositionY = ball.y;
+				moveCells(PositionX, PositionY);
+			});
+		}
+	}
+	if (ball_id == ActeurID) {
+		if (lost == true) {
+			PositionX = ball.x;
+			PositionY = ball.y;
+			moveCells(PositionX, PositionY);
+			lost = false;
+			ball.on('disappear', function() {
+				console.log("acteur disparu")
+				lost = true;				
+			})
+			ball.on('move', function(old_x, old_y, new_x, new_y) {
+				if (ball.visible == true) 
+				{
+				PositionX = ball.x;
+				PositionY = ball.y;
+				moveCells(PositionX, PositionY);
+				}
+				else {
+					console.log("ball invisible !!!");
+					
+				}
+			});
+		}
+		
+	}
+	if (ball.name = "suicidaire") {
+		
+		otherSuicidaire = true;
+		console.log('other suicidaire found.');
+		ball.on("destroy", function(ball_id, reason) {
+			if (reason.reason == 'eaten') {
+				if (reason.by == ActeurID) {
+					console.log("un suicidaire a été mangé par l'acteur.");
+					if (suicidaire3.my_balls.lenghts == 0) {
+						suicidaire3.spawn("suicidaire");
+						
+					}
+					
+				}
+				else
+				{
+					
+					otherSuicidaire = false;
+				}
+				
+			}
+			else {
+				
+				otherSuicidaire = false;
+			}
+			
+		})
+	}
+	
+	
+});
+
+
+suicidaire3.on('somebodyAteSomething', function(eater_id, eaten_id) {
+	
+	if (eater_id == ActeurID && eaten_id == suicidaire3.my_balls) {		
+		console.log("l'acteur m'a mangé !!!!!");
+		if (otherSuicidaire == true) {
+			suicidaire3.spawn("suicidaire");
+		}
+	}
+	else {
+		
+		if (eaten_id == suicidaire3.my_balls) {
+			
+			suicidaire3.spawn("suicidaire");
+		}
+	}
+	
+});
+
+suicidaire4.on('ballAppear', function(ball_id) {
+	ball = suicidaire4.balls[ball_id];
+	if (ball.mine) return;
+	if (ActeurID == 0) {
+		if (ball.name == "Acteur.") {			
+			ActeurID = ball_id;
+			PositionX = ball.x;
+			PositionY = ball.y;
+			moveCells(PositionX, PositionY);
+			lost = false;
+			ball.on('move', function(old_x, old_y, new_x, new_y) {				
+				PositionX = ball.x;
+				PositionY = ball.y;
+				moveCells(PositionX, PositionY);
+			});
+		}
+	}
+	if (ball_id == ActeurID) {
+		if (lost == true) {
+			PositionX = ball.x;
+			PositionY = ball.y;
+			moveCells(PositionX, PositionY);
+			lost = false;
+			ball.on('disappear', function() {
+				console.log("acteur disparu")
+				lost = true;				
+			})
+			ball.on('move', function(old_x, old_y, new_x, new_y) {
+				if (ball.visible == true) 
+				{
+				PositionX = ball.x;
+				PositionY = ball.y;
+				moveCells(PositionX, PositionY);
+				}
+				else {
+					console.log("ball invisible !!!");
+					
+				}
+			});
+		}
+		
+	}
+	if (ball.name = "suicidaire") {
+		
+		otherSuicidaire = true;
+		console.log('other suicidaire found.');
+		ball.on("destroy", function(ball_id, reason) {
+			if (reason.reason == 'eaten') {
+				if (reason.by == ActeurID) {
+					console.log("un suicidaire a été mangé par l'acteur.");
+					if (suicidaire4.my_balls.lenghts == 0) {
+						suicidaire4.spawn("suicidaire");
+						
+					}
+					
+				}
+				else
+				{
+					
+					otherSuicidaire = false;
+				}
+				
+			}
+			else {
+				
+				otherSuicidaire = false;
+			}
+			
+		})
+	}
+	
+	
+});
+
+
+suicidaire4.on('somebodyAteSomething', function(eater_id, eaten_id) {
+	
+	if (eater_id == ActeurID && eaten_id == suicidaire4.my_balls) {		
+		console.log("l'acteur m'a mangé !!!!!");
+		if (otherSuicidaire == true) {
+			suicidaire4.spawn("suicidaire");
+		}
+	}
+	else {
+		
+		if (eaten_id == suicidaire4.my_balls) {
+			
+			suicidaire4.spawn("suicidaire");
+		}
+	}
+	
+});
 
 
 
