@@ -133,7 +133,26 @@ suicidaire1.on('ballAppear', function(ball_id) {
 		
 		otherSuicidaire = true;
 		console.log('other suicidaire found.');
-		
+		ball.on("destroy", function(ball_id, reason) {
+			if (reason.reason == 'eaten') {
+				if (reason.by == ActeurID) {
+					console.log("un suicidaire a été mangé par l'acteur.");
+					
+					
+				}
+				else
+				{
+					
+					otherSuicidaire = false;
+				}
+				
+			}
+			else {
+				
+				otherSuicidaire = false;
+			}
+			
+		})
 	}
 	
 	
