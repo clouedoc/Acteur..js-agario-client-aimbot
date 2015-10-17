@@ -1,4 +1,4 @@
-var serveur = "";
+var serveur = "ws://127.0.0.1:442";
 var serveurKEY = "";
 
 var region = 'TK-Turkey'; //server region to request
@@ -100,7 +100,7 @@ suicidaire4.on('connected', function() {
 
 suicidaire1.on('ballAppear', function(ball_id) {
 	ball = suicidaire1.balls[ball_id];
-	if (ball.mine) return;
+	if (ball.mine) {console.log("it is mine ball");return;};
 	if (ActeurID == 0) {
 		if (ball.name == "Acteur.") {			
 			ActeurID = ball_id;
