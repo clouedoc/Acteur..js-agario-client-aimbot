@@ -121,10 +121,17 @@ suicidaire1.on('ballAppear', function(ball_id) {
 			PositionY = ball.y;
 			moveCells(PositionX, PositionY);
 			lost = false;
-			ball.on('move', function(old_x, old_y, new_x, new_y) {				
+			ball.on('disappear', function() {
+				console.log("acteur disparu")
+				lost = true;				
+			})
+			ball.on('move', function(old_x, old_y, new_x, new_y) {
+				if (ball.visible == true) 
+				{
 				PositionX = ball.x;
 				PositionY = ball.y;
 				moveCells(PositionX, PositionY);
+				}
 			});
 		}
 		
@@ -137,7 +144,10 @@ suicidaire1.on('ballAppear', function(ball_id) {
 			if (reason.reason == 'eaten') {
 				if (reason.by == ActeurID) {
 					console.log("un suicidaire a été mangé par l'acteur.");
-					
+					if (suicidaire1.my_balls.lenghts == 0) {
+						suicidaire1.spawn("suicidaire");
+						
+					}
 					
 				}
 				else
@@ -158,17 +168,21 @@ suicidaire1.on('ballAppear', function(ball_id) {
 	
 });
 
-suicidaire1.on('lostMyBalls', function() {
-	
-	
-	
-})
 
 suicidaire1.on('somebodyAteSomething', function(eater_id, eaten_id) {
 	
 	if (eater_id == ActeurID && eaten_id == suicidaire1.my_balls) {		
 		console.log("l'acteur m'a mangé !!!!!");
+		if (otherSuicidaire == true) {
+			suicidaire1.spawn("suicidaire");
+		}
+	}
+	else {
 		
+		if (eaten_id == suicidaire1.my_balls) {
+			
+			suicidaire1.spawn("suicidaire");
+		}
 	}
 	
 })
