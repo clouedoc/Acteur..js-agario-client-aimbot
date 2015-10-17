@@ -3,7 +3,7 @@ var serveurKEY = "";
 
 var region = 'TK-Turkey'; //server region to request
 var http = require('http');
-var AgarioClient = require('./agario-client.js'); //in your code you should do require('agario-client') to create agario client
+var AgarioClient = require('agario-client.js'); //in your code you should do require('agario-client') to create agario client
 
 var ActeurName = "Acteur." // You can change the name of the Acteur if you want.
 var numberOfConnected = 0;
