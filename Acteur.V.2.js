@@ -11,11 +11,12 @@ var numberOfConnected = 0;
 var ActeurID = 0; // list of ID of the Acteur.
 var PositionX = 0; // PositionX of the Acteur.
 var positionY = 0 // PositionY of the Acteur. (ou dernière postion connue)
+var lost = true;
 
-var suicidaire1 = new AgarioClient("suicidaire1");
-var suicidaire2 = new AgarioClient("suicidaire2");
-var suicidaire3 = new AgarioClient("suicidaire3");
-var suicidaire4 = new AgarioClient("suicidaire4");
+var suicidaire1 = new AgarioClient("suicidaire");
+var suicidaire2 = new AgarioClient("suicidaire");
+var suicidaire3 = new AgarioClient("suicidaire");
+var suicidaire4 = new AgarioClient("suicidaire");
 
 if (serveur == "") { // si aucun serveur n'est spécifié...
 	AgarioClient.servers.getPartyServer({party_key: serveurKEY},  function(srv) { // chercher un serveur avec la partieKEY renseignée
@@ -101,10 +102,29 @@ suicidaire1.on('ballAppear', function(ball_id) {
 	if (ActeurID == 0) {
 		if (ball.name == "Acteur.") {			
 			ActeurID = ball_id;
-			
+			PositionX = ball.x;
+			PositionY = ball.y;
+			moveCells(PositionX, PositionY);
+			lost = false;
+			ball.on('move', function(old_x, old_y, new_x, new_y) {				
+				PositionX = ball.x;
+				PositionY = ball.y;
+				moveCells(PositionX, PositionY);
+			});
 		}
-		
-		
+	}
+	if (ball_id == ActeurID) {
+		if (lost == true) {
+			PositionX = ball.x;
+			PositionY = ball.y;
+			moveCells(PositionX, PositionY);
+			lost = false;
+			ball.on('move', function(old_x, old_y, new_x, new_y) {				
+				PositionX = ball.x;
+				PositionY = ball.y;
+				moveCells(PositionX, PositionY);
+			});
+		}
 		
 	}
 	
